@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Agriculture IoT</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background: #f4f7f6;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+header{
+    background: #2e7d32;
+    color: white;
+    padding: 15px;
+}
+
+.container{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+    gap: 20px;
+    padding: 30px;
+}
+
+.card{
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.value{
+    font-size: 40px;
+    font-weight: bold;
+    color: #2e7d32;
+}
+
+.status{
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+footer{
+    background: #2e7d32;
+    color: white;
+    padding: 10px;
+    margin-top: 20px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>🌱 Smart Agriculture IoT Dashboard</h1>
+    <p>Monitoring Humidity, Soil Moisture & IR Sensor</p>
+</header>
+
+<div class="container">
+
+    <!-- Humidity -->
+    <div class="card">
+        <h2>🌡 Humidity</h2>
+        <div class="value" id="humidity">--%</div>
+        <div class="status" id="humidityStatus">Waiting...</div>
+    </div>
+
+    <!-- Soil Moisture -->
+    <div class="card">
+        <h2>💧 Soil Moisture</h2>
+        <div class="value" id="soil">--%</div>
+        <div class="status" id="soilStatus">Waiting...</div>
+    </div>
+
+    <!-- IR Sensor -->
+    <div class="card">
+        <h2>🔴 IR Sensor</h2>
+        <div class="value" id="ir">--</div>
+        <div class="status" id="irStatus">Waiting...</div>
+    </div>
+
+</div>
+
+<footer>
+    <p>© 2026 Smart Agriculture IoT</p>
+</footer>
+
+<script>
+// 🔄 Simulated live data
+function updateSensors(){
+
+    // Humidity (40–90%)
+    let humidity = Math.floor(Math.random()*50) + 40;
+    document.getElementById("humidity").innerText = humidity + "%";
+
+    if(humidity > 70)
+        document.getElementById("humidityStatus").innerText = "High Humidity";
+    else
+        document.getElementById("humidityStatus").innerText = "Normal";
+
+    // Soil moisture (20–80%)
+    let soil = Math.floor(Math.random()*60) + 20;
+    document.getElementById("soil").innerText = soil + "%";
+
+    if(soil < 40)
+        document.getElementById("soilStatus").innerText = "⚠ Soil Dry - Water Needed";
+    else
+        document.getElementById("soilStatus").innerText = "Soil Moist";
+
+    // IR sensor (0 or 1)
+    let ir = Math.round(Math.random());
+    document.getElementById("ir").innerText = ir;
+
+    if(ir === 1)
+        document.getElementById("irStatus").innerText = "🚨 Obstacle Detected";
+    else
+        document.getElementById("irStatus").innerText = "No Obstacle";
+}
+
+// update every 3 seconds
+setInterval(updateSensors, 3000);
+updateSensors();
+</script>
+
+</body>
+</html>
